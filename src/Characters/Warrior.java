@@ -20,16 +20,20 @@ public class Warrior extends Character
 
     /********** Getters **********/
 
-    protected int getMinHealth() {
+    @Override public int getMinHealth() {
         return minHealth;
     }
-    public int getMaxHealth() {
+    @Override public int getMaxHealth() {
         return maxHealth;
     }
-    public int getMinStrength() {
+    @Override public int getMinStrength() {
         return minStrength;
     }
-    public int getMaxStrength() {
+    @Override public int getMaxStrength() {
         return maxStrength;
     }
+
+    /********* Autres méthodes ***********/
+
+    @Override public String getType() { return "guerrier"; }
 }

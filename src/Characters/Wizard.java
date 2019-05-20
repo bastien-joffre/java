@@ -20,16 +20,20 @@ public class Wizard extends Character
 
     /********** Getters **********/
 
-    protected int getMinHealth() {
+    @Override public int getMinHealth() {
         return this.minHealth;
     }
-    public int getMaxHealth() {
+    @Override public int getMaxHealth() {
         return this.maxHealth;
     }
-    public int getMinStrength() {
+    @Override public int getMinStrength() {
         return this.minStrength;
     }
-    public int getMaxStrength() {
+    @Override public int getMaxStrength() {
         return this.maxStrength;
     }
+
+    /********* Autres méthodes ***********/
+
+    @Override public String getType() { return "magicien"; }
 }

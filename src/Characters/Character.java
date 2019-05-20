@@ -1,6 +1,6 @@
 package Characters;
 
-public class Character
+public abstract class Character
 {
     private String name;
     private String image;
@@ -61,8 +61,14 @@ public class Character
 
     /********* Autres méthodes ***********/
 
+    public abstract int getMinHealth();
+    public abstract int getMaxHealth();
+    public abstract int getMinStrength();
+    public abstract int getMaxStrength();
+    public abstract String getType();
+
     public void getInfo() {
-        System.out.println("Caractéristiques de " + this.name + " :" +
+        System.out.println("Caractéristiques de " + this.name + " le " + this.getType() + ":" +
                 "\n- Image : " + this.image +
                 "\n- Points de vie : " + this.health +
                 "\n- Force de frappe : " + this.strength

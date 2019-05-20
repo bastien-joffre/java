@@ -23,29 +23,29 @@ public class Main
             System.out.println("Type inconnu... Choisi g ou m");
             characterType = input.nextLine(); // Tant que le nombre de points de force est invalide, reproposer
         }
+
+        Character monPerso;
         if (characterType.equals("g")) {
-            Warrior monPerso = new Warrior(name, image);
+            monPerso = new Warrior(name, image);
         } else {
-            Wizard monPerso = new Wizard(name, image);
+            monPerso = new Wizard(name, image);
         }
 
-        System.out.println("Hmm canon ! Sur une échelle de 5 à 10, à quel point pense tu être résistant ?");
+        System.out.println("Hmm canon ! Sur une échelle de " + monPerso.getMinHealth() + " à " + monPerso.getMaxHealth() + ", à quel point pense tu être résistant ?");
         int health = input.nextInt(); // Rentrer le nombre de Points de vie
-        while (health < 5 || health > 10) {
-            System.out.println("Soyons raisonnables, rentre un nombre entre 5 et 10 on a dit...");
+        while (health < monPerso.getMinHealth() || health > monPerso.getMaxHealth()) {
+            System.out.println("Soyons raisonnables, rentre un nombre entre " + monPerso.getMinHealth() + " et " + monPerso.getMaxHealth() + " on a dit...");
             health = input.nextInt(); // Tant que le nombre de points de vie est invalide, reproposer
         }
+        monPerso.setHealth(health);
 
-        System.out.println("Pas mal ! Et sur une échelle de 5 à 10, à quel point pense tu être balèze ?");
+        System.out.println("Pas mal ! Et sur une échelle de " + monPerso.getMinStrength() + " à " + monPerso.getMaxStrength() + ", à quel point pense tu être balèze ?");
         int strength = input.nextInt(); // Rentrer le nombre de Points de vie
-        while (strength < 5 || strength > 10) {
-            System.out.println("Soyons raisonnables, rentre un nombre entre 5 et 10 on a dit...");
+        while (strength < monPerso.getMinStrength() || strength > monPerso.getMaxStrength()) {
+            System.out.println("Soyons raisonnables, rentre un nombre entre " + monPerso.getMinStrength() + " et " + monPerso.getMaxStrength() + " on a dit...");
             strength = input.nextInt(); // Tant que le nombre de points de force est invalide, reproposer
         }
-
-        // Wizard monPerso = new Wizard(name, image, health, strength);
-
-        // Character monPerso = new Character("Joe", "empty", 8, 8);
+        monPerso.setStrength(strength);
 
         monPerso.getInfo();
     }
