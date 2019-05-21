@@ -1,6 +1,8 @@
 import Characters.Character;
 import Characters.Wizard;
 import Characters.Warrior;
+import Equipments.Attack.Weapon;
+import Equipments.Defense.Shield;
 
 
 import java.util.Scanner;
@@ -31,7 +33,7 @@ public class Main
             monPerso = new Wizard(name, image);
         }
 
-        System.out.println("Hmm canon ! Sur une échelle de " + monPerso.getMinHealth() + " à " + monPerso.getMaxHealth() + ", à quel point pense tu être résistant ?");
+        System.out.println("Sur une échelle de " + monPerso.getMinHealth() + " à " + monPerso.getMaxHealth() + ", à quel point pense tu être résistant ?");
         int health = input.nextInt(); // Rentrer le nombre de Points de vie
         while (health < monPerso.getMinHealth() || health > monPerso.getMaxHealth()) {
             System.out.println("Soyons raisonnables, rentre un nombre entre " + monPerso.getMinHealth() + " et " + monPerso.getMaxHealth() + " on a dit...");
@@ -39,7 +41,7 @@ public class Main
         }
         monPerso.setHealth(health);
 
-        System.out.println("Pas mal ! Et sur une échelle de " + monPerso.getMinStrength() + " à " + monPerso.getMaxStrength() + ", à quel point pense tu être balèze ?");
+        System.out.println("Et sur une échelle de " + monPerso.getMinStrength() + " à " + monPerso.getMaxStrength() + ", à quel point pense tu être balèze ?");
         int strength = input.nextInt(); // Rentrer le nombre de Points de vie
         while (strength < monPerso.getMinStrength() || strength > monPerso.getMaxStrength()) {
             System.out.println("Soyons raisonnables, rentre un nombre entre " + monPerso.getMinStrength() + " et " + monPerso.getMaxStrength() + " on a dit...");
@@ -47,6 +49,9 @@ public class Main
         }
         monPerso.setStrength(strength);
 
-        monPerso.getInfo();
+        monPerso.setEquipedAttack();
+        monPerso.setEquipedDefense();
+        
+        System.out.println(monPerso);
     }
 }

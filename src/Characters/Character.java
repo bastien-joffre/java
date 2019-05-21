@@ -1,13 +1,19 @@
 package Characters;
 
+import Equipments.Attack.*;
+import Equipments.Defense.*;
+
 public abstract class Character
 {
     private String name;
     private String image;
     private int health;
     private int strength;
+    protected Attack equipedAttack;
+    protected Defense equipedDefense;
 
-    /********** s **********/
+
+    /********** Constructors **********/
 
     public Character(String pName, String pImage, int pHealth, int pStrength)
     {
@@ -59,6 +65,26 @@ public abstract class Character
         this.strength = pStrength;
     }
 
+//    public void setEquipedAttack(Attack pAttack) {
+//        if ((this instanceof Warrior && pAttack instanceof Weapon) ||
+//            (this instanceof Wizard && pAttack instanceof Spell)) {
+//            this.equipedAttack = pAttack;
+//        } else {
+//            System.out.println("Cet équipement n'est pas accessible pour votre type de combattant...");
+//        }
+//    }
+//    public void setEquipedDefense(Defense pDefense) {
+//        if ((this instanceof Warrior && pDefense instanceof Shield) ||
+//            (this instanceof Wizard && pDefense instanceof Philter)) {
+//            this.equipedDefense = pDefense;
+//        } else {
+//            System.out.println("Cet équipement n'est pas accessible pour votre type de combattant...");
+//        }
+//    }
+
+    public abstract void setEquipedAttack();
+    public abstract void setEquipedDefense();
+
     /********* Autres méthodes ***********/
 
     public abstract int getMinHealth();
@@ -67,11 +93,12 @@ public abstract class Character
     public abstract int getMaxStrength();
     public abstract String getType();
 
-    public void getInfo() {
-        System.out.println("Caractéristiques de " + this.name + " le " + this.getType() + ":" +
-                "\n- Image : " + this.image +
-                "\n- Points de vie : " + this.health +
-                "\n- Force de frappe : " + this.strength
-        );
+    public String  toString() {
+        return "Caractéristiques de " + this.name + " le " + this.getType() + ":" +
+            "\n- Image : " + this.image +
+            "\n- Points de vie : " + this.health +
+            "\n- Force de frappe : " + this.strength +
+            "\n- Je frappe avec : " + this.equipedAttack.getName() + " avec une puissance de " + this.equipedAttack.getPower() +
+            "\n- Je me protège avec : " + this.equipedDefense.getName() + " qui possède une résistance de " + this.equipedDefense.getResistance();
     }
 }

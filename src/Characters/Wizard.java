@@ -1,11 +1,18 @@
 package Characters;
 
+import Interactions.Interact;
+
+import Equipments.Attack.Spell;
+import Equipments.Defense.Philter;
+
 public class Wizard extends Character
 {
     private int minHealth = 3;
     private int maxHealth = 6;
     private int minStrength = 8;
     private int maxStrength = 15;
+
+    private Interact interact = new Interact();
 
     /********** Constructeurs **********/
 
@@ -31,6 +38,23 @@ public class Wizard extends Character
     }
     @Override public int getMaxStrength() {
         return this.maxStrength;
+    }
+
+    /********** Setters **********/
+
+    public void setEquipedAttack() {
+        Spell weapon = new Spell(
+                interact.chooseEquipmentName("arme"),
+                interact.chooseAttackPower("arme")
+        );
+        super.equipedAttack = weapon;
+    }
+    public void setEquipedDefense() {
+        Philter shield = new Philter(
+                interact.chooseEquipmentName("bouclier"),
+                interact.chooseDefenseResistance("bouclier")
+        );
+        super.equipedDefense = shield;
     }
 
     /********* Autres méthodes ***********/
