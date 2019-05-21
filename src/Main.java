@@ -1,24 +1,48 @@
 import Characters.Character;
+import Characters.Warrior;
+import Characters.Wizard;
 import Interactions.Interact;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main
 {
     public static void main(String[] args)
     {
-        Scanner input = new Scanner(System.in);
+        ArrayList<Character> characters = new ArrayList<>();
 
-        System.out.print(
-            Interact.ascii() +
-            "Que souhaitez-vous faire ?\n" +
-            "[1] Créer un nouveau personnage\n" +
-            "[2] Consulter vos personnages\n" +
-            "[3] Quitter le jeu"
-        );
-        int option = Interact.parseInt(input.nextLine());
-        
-        Character monPerso = Interact.createCharacter();
-        System.out.println(monPerso);
+        boolean play = true;
+
+        Interact.asciiWelcome();
+
+        Character monPerso1 = new Warrior("André", "", 10, 5); //Objets de test
+        Wizard monPerso2 = new Wizard("Michel", "", 6, 12); //Objets de test
+        characters.add(monPerso1); //Objets de test
+        characters.add(monPerso2); //Objets de test
+
+        do {
+            switch (Interact.mainMenu()) {
+                case 1:
+//                    Character monPerso = Interact.createCharacter();
+//                    System.out.println(monPerso);
+//                    characters.add(monPerso);
+                    break;
+                case 2:
+                    System.out.println();
+                    for (Character character : characters) {
+                        System.out.println(
+                            "[" + (characters.indexOf(character) + 1) + "] " +
+                            character.getName() + " le " + character.getType()
+                        );
+                    }
+                    Interact.charactersMenu(characters);
+                    break;
+                case 3:
+                    play = false;
+                    break;
+            }
+        } while (play);
+
+        Interact.asciiGoodbye();
     }
 }

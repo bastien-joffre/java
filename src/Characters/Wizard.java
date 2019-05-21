@@ -18,6 +18,8 @@ public class Wizard extends Character
 
     public Wizard(String pName, String pImage, int pHealth, int pStrength) {
         super(pName, pImage, pHealth, pStrength);
+        super.equipedAttack = new Spell ("boules de fire", 16);
+        super.equipedDefense = new Philter("champ de force", 5);
     }
     public Wizard(String pName, String pImage)
     {

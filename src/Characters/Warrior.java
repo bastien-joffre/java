@@ -18,6 +18,9 @@ public class Warrior extends Character
 
     public Warrior(String pName, String pImage, int pHealth, int pStrength) {
         super(pName, pImage, pHealth, pStrength);
+        super.equipedAttack = new Weapon ("hache", 12);
+        super.equipedDefense = new Shield("bouclier en bois", 4);
+
     }
     public Warrior(String pName, String pImage)
     {

@@ -4,11 +4,79 @@ import Characters.Character;
 import Characters.Warrior;
 import Characters.Wizard;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Interact
 {
     private static Scanner input = new Scanner(System.in);
+
+    /********** Menus **********/
+
+    public static int mainMenu() {
+        System.out.println(
+            "  ___ MENU PRINCIPAL _________________________  \n"+
+            "/                                              \\\n"+
+            "|     [1] Créer un nouveau personnage          |\n"+
+            "|     [2] Consulter vos personnages            |\n"+
+            "|     [3] Quitter le jeu                       |\n"+
+            "\\______________________________________________/\n"
+        );
+        int option = Interact.parseInt(input.nextLine());
+        while (option < 1 || option > 3) {
+            System.out.println("Nous n'avons pas compris votre choix... Tappez 1, 2 ou 3.");
+            option = Interact.parseInt(input.nextLine());
+        }
+        return option;
+    }
+
+    public static void charactersMenu(ArrayList<Character> characters) {
+        Character selectedCharacter;
+
+        System.out.println(
+            "\n" +
+            "  ___ OPTIONS ________________________________  \n"+
+            "/                                              \\\n"+
+            "|   Pour sélectionner un personnage, tappez    |\n"+
+            "|   son numéro. Pour retourner au menu         |\n"+
+            "|   principal, tappez n'importe quel chiffre   |\n"+
+            "\\______________________________________________/\n"
+        );
+
+        int option = Interact.parseInt(input.nextLine());
+        if (option <= characters.size() && option > 0) {
+            selectedCharacter = characters.get(option - 1);
+            modifyCharacter(selectedCharacter);
+        }
+    }
+
+    public static void modifyCharacter(Character character) {
+        System.out.println(
+            "\n\n" + character + "\n\n" +
+            "  ___ OPTIONS ________________________________  \n"+
+            "/                                              \\\n"+
+            "|     [1] Modifier le nom                      |\n"+
+            "|     [2] Modifier l'image                     |\n"+
+            "|     [3] Changer d'attaque                    |\n"+
+            "|     [4] Changer de défense                   |\n"+
+            "|                                              |\n"+
+            "|     Pour revenir au menu principal,          |\n"+
+            "|     appuyez sur n'importe quelle touche.     |\n"+
+            "\\______________________________________________/\n"
+        );
+        switch (input.nextLine()) {
+            case "1":
+                                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            case "4":
+                break;
+        }
+    }
+
+    /********** Characters **********/
 
     public static Character createCharacter() {
         System.out.println("Quel sera le nom de votre combattant ?");
@@ -39,6 +107,10 @@ public class Interact
 
         return newCharacter;
     }
+
+//    private String chooseName() {
+//
+//    }
 
     public static int chooseAttackPower(String type) {
         System.out.println("Quelle sera la puissance de votre " + type);
@@ -81,6 +153,8 @@ public class Interact
         return strength;
     }
 
+    /********** Other methods **********/
+
     public static int parseInt(String string) {
         try {
             return Integer.parseInt(string);
@@ -90,8 +164,8 @@ public class Interact
         }
     }
 
-    public static String ascii() {
-        return
+    public static void asciiWelcome() {
+        System.out.println(
             "            .                                                      .             \n" +
             "          .n                   .                 .                  n.           \n" +
             "    .   .dP                  dP                   9b                 9b.    .    \n" +
@@ -123,7 +197,23 @@ public class Interact
             " ░    ░  ▒ ░   ░      ░   ░ ░     ░░     ░      ░   ░ ░  ░░░ ░ ░    ░          ░ \n" +
             " ░       ░     ░  ░         ░      ░     ░  ░         ░    ░        ░  ░    ░    \n" +
             "      ░                           ░                                              \n\n"
-        ;
+        );
+    }
+
+    public static void asciiGoodbye() {
+        System.out.println(
+            "\n"+
+            "  ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███      ▐██▌ \n"+
+            " ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀    ▒██▒  ██▒▓██░   █▒▓█   ▀ ▓██ ▒ ██▒    ▐██▌ \n"+
+            "▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███      ▒██░  ██▒ ▓██  █▒░▒███   ▓██ ░▄█ ▒    ▐██▌ \n"+
+            "░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄    ▒██   ██░  ▒██ █░░▒▓█  ▄ ▒██▀▀█▄      ▓██▒ \n"+
+            "░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒   ░ ████▓▒░   ▒▀█░  ░▒████▒░██▓ ▒██▒    ▒▄▄  \n"+
+            " ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░   ░ ▒░▒░▒░    ░ ▐░  ░░ ▒░ ░░ ▒▓ ░▒▓░    ░▀▀▒ \n"+
+            "  ░   ░   ▒   ▒▒ ░░  ░      ░ ░ ░  ░     ░ ▒ ▒░    ░ ░░   ░ ░  ░  ░▒ ░ ▒░    ░  ░ \n"+
+            "░ ░   ░   ░   ▒   ░      ░      ░      ░ ░ ░ ▒       ░░     ░     ░░   ░        ░ \n"+
+            "      ░       ░  ░       ░      ░  ░       ░ ░        ░     ░  ░   ░         ░    \n"+
+            "                                                     ░                            \n"
+        );
     }
 
     private static int randomiser(int min, int max) {
