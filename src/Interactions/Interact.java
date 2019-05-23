@@ -4,8 +4,11 @@ import Characters.Character;
 import Characters.Warrior;
 import Characters.Wizard;
 
+import Exceptions.NamingException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Interact
 {
@@ -59,6 +62,7 @@ public class Interact
             "|     [2] Modifier l'image                     |\n"+
             "|     [3] Changer d'attaque                    |\n"+
             "|     [4] Changer de défense                   |\n"+
+            "|     [5] Supprimer le personnage              |\n"+
             "|                                              |\n"+
             "|     Pour revenir au menu principal,          |\n"+
             "|     appuyez sur n'importe quelle touche.     |\n"+
@@ -66,21 +70,35 @@ public class Interact
         );
         switch (input.nextLine()) {
             case "1":
-                                break;
+                try {
+                    character.setName(chooseName());
+                    modifyCharacter(character);
+                } catch(NamingException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
             case "2":
+                character.setImage(chooseImage());
+                modifyCharacter(character);
                 break;
             case "3":
+                character.setEquipedAttack();
+                modifyCharacter(character);
                 break;
             case "4":
+                character.setEquipedDefense();
+                modifyCharacter(character);
+                break;
+            case "5":
+                characters.remove(character);
                 break;
         }
     }
 
     /********** Characters **********/
 
-    public static Character createCharacter() {
-        System.out.println("Quel sera le nom de votre combattant ?");
-        String name = input.nextLine(); // Rentrer le nom du personnage
+    public static Character createCharacter() throws NamingException {
+        String name = chooseName();
 
         System.out.println("Bienvenue à toi " + name + ", donne moi un lien vers une image de toi maintenant :");
         String image = input.nextLine(); // Rentrer l"url de l"image
@@ -108,9 +126,20 @@ public class Interact
         return newCharacter;
     }
 
-//    private String chooseName() {
-//
-//    }
+    private static String chooseName() throws NamingException {
+        System.out.println("Quel sera le nom de votre combattant ?");
+        String name = input.nextLine();
+        if (stringContainsNumber(name)){
+          throw new NamingException();
+        } else {
+            return name;
+        }
+    }
+
+    private static String chooseImage() {
+        System.out.println("Quelle image veux-tu utiliser ?");
+        return input.nextLine(); // Rentrer l'url de l'image
+    }
 
     public static int chooseAttackPower(String type) {
         System.out.println("Quelle sera la puissance de votre " + type);
@@ -162,6 +191,10 @@ public class Interact
             System.out.println("Saisissez un nombre entier.");
             return parseInt(input.nextLine());
         }
+    }
+
+    public static boolean stringContainsNumber( String s ) {
+        return Pattern.compile( "[0-9]" ).matcher( s ).find();
     }
 
     public static void asciiWelcome() {

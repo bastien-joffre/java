@@ -65,23 +65,6 @@ public abstract class Character
         this.strength = pStrength;
     }
 
-//    public void setEquipedAttack(Attack pAttack) {
-//        if ((this instanceof Warrior && pAttack instanceof Weapon) ||
-//            (this instanceof Wizard && pAttack instanceof Spell)) {
-//            this.equipedAttack = pAttack;
-//        } else {
-//            System.out.println("Cet équipement n'est pas accessible pour votre type de combattant...");
-//        }
-//    }
-//    public void setEquipedDefense(Defense pDefense) {
-//        if ((this instanceof Warrior && pDefense instanceof Shield) ||
-//            (this instanceof Wizard && pDefense instanceof Philter)) {
-//            this.equipedDefense = pDefense;
-//        } else {
-//            System.out.println("Cet équipement n'est pas accessible pour votre type de combattant...");
-//        }
-//    }
-
     public abstract void setEquipedAttack();
     public abstract void setEquipedDefense();
 
