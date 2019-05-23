@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 public class Interact
 {
+    public static ArrayList<Character> characters = new ArrayList<>();
     private static Scanner input = new Scanner(System.in);
 
     /********** Menus **********/
@@ -33,9 +34,14 @@ public class Interact
         return option;
     }
 
-    public static void charactersMenu(ArrayList<Character> characters) {
-        Character selectedCharacter;
-
+    public static void charactersMenu() {
+        System.out.println();
+        for (Character character : Interact.characters) {
+            System.out.println(
+                    "[" + (Interact.characters.indexOf(character) + 1) + "] " +
+                            character.getName() + " le " + character.getType()
+            );
+        }
         System.out.println(
             "\n" +
             "  ___ OPTIONS ________________________________  \n"+
@@ -46,6 +52,7 @@ public class Interact
             "\\______________________________________________/\n"
         );
 
+        Character selectedCharacter;
         int option = Interact.parseInt(input.nextLine());
         if (option <= characters.size() && option > 0) {
             selectedCharacter = characters.get(option - 1);
@@ -53,7 +60,7 @@ public class Interact
         }
     }
 
-    public static void modifyCharacter(Character character) {
+    private static void modifyCharacter(Character character) {
         System.out.println(
             "\n\n" + character + "\n\n" +
             "  ___ OPTIONS ________________________________  \n"+
@@ -91,14 +98,22 @@ public class Interact
                 break;
             case "5":
                 characters.remove(character);
+                charactersMenu();
                 break;
         }
     }
 
     /********** Characters **********/
 
-    public static Character createCharacter() throws NamingException {
-        String name = chooseName();
+    public static void createCharacter() throws NamingException {
+
+        String name;
+        try {
+            name = chooseName();
+        } catch (NamingException e) {
+            System.out.println(e.getMessage());
+            name = chooseName();
+        }
 
         System.out.println("Bienvenue à toi " + name + ", donne moi un lien vers une image de toi maintenant :");
         String image = input.nextLine(); // Rentrer l"url de l"image
@@ -123,7 +138,8 @@ public class Interact
         newCharacter.setEquipedAttack();
         newCharacter.setEquipedDefense();
 
-        return newCharacter;
+        System.out.println(newCharacter);
+        characters.add(newCharacter);
     }
 
     private static String chooseName() throws NamingException {
