@@ -2,6 +2,7 @@ package Characters;
 
 import Interactions.Interact;
 
+import Equipments.Equipment;
 import Equipments.Attack.Weapon;
 import Equipments.Defense.Shield;
 
@@ -62,6 +63,21 @@ public class Warrior extends Character
     /********* Autres méthodes ***********/
 
     @Override public String getType() { return "guerrier"; }
+
+    @Override public Equipment getRandomWeapon() {
+        int random = (int) (Math.random() * 100 + 1);
+
+        if (random < 60) {
+            return new Weapon("épée en bois", 2);
+        } else if (random < 80) {
+            return new Weapon("masse d'arme en mousse", 3);
+        } else if (random < 95) {
+            return new Weapon("hache en contraplaqué", 4);
+        } else {
+            return new Weapon("AK-47", 5);
+        }
+    }
+
 
     public String toString() {
         return super.toString() +

@@ -2,19 +2,23 @@ package Interactions;
 
 import Characters.Character;
 import Characters.Snake;
+import Equipments.Equipment;
 
 public class Action
 {
-
     public static void goToNewFloor(Character player) {
-        Floor.current = new Floor();
-        System.out.println(Floor.current);
+        Floor floor = new Floor();
+        System.out.println(floor);
 
-        if(Floor.current.snake != null) {
-            Character snake = Floor.current.snake;
+        if(floor.snake != null) {
+            Character snake = floor.snake;
             switch (Interact.fightingOptions()) {
                 case 1:
                     fight(player, snake);
+                    System.out.println(floor.attack);
+                    if (floor.attack && snake.getHealth() <=0 ) {
+                        lootFloor(player);
+                    }
                     break;
                 case 2:
                     runAway();
@@ -54,6 +58,7 @@ public class Action
                     enemy.setHealth(enemy.getHealth() - playerHit);
                     System.out.println("Vous infligez " + playerHit + " dommages, il lui reste " + enemy.getHealth() + " points de vie.");
                 } else {
+                    enemy.setHealth(0);
                     System.out.println(
                             "Vous infligez " + playerHit + " dommages, le " + enemy.getName() + " est mort !"
                     );
@@ -67,4 +72,15 @@ public class Action
     private static void runAway() {
 
     }
+
+    private static void lootFloor(Character player) {
+        Equipment loot = player.getRandomWeapon();
+        switch (Interact.equipOrNot(player, loot)) {
+            case 1:
+                player.setEquipedAttack();
+                break;
+        };
+    }
+
+
 }

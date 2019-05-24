@@ -15,4 +15,8 @@ public abstract class Equipment
     public String getName() {
         return name;
     }
+
+    public abstract String getCategory();
+
+    public abstract String toString();
 }

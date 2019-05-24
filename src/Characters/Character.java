@@ -2,6 +2,7 @@ package Characters;
 
 import Equipments.Attack.*;
 import Equipments.Defense.*;
+import Equipments.Equipment;
 
 public abstract class Character
 {
@@ -81,8 +82,9 @@ public abstract class Character
     public abstract int getMinStrength();
     public abstract int getMaxStrength();
     public abstract String getType();
+    public abstract Equipment getRandomWeapon();
 
-    public String  toString() {
+    public String toString() {
         return "Caractéristiques de " + this.name + " le " + this.getType() + ":" +
             "\n- Points de vie : " + this.health +
             "\n- Force de frappe : " + this.strength;

@@ -1,5 +1,6 @@
 package Characters;
 
+import Equipments.Equipment;
 import Interactions.Interact;
 
 import Equipments.Attack.Spell;
@@ -61,6 +62,20 @@ public class Wizard extends Character
     /********* Autres méthodes ***********/
 
     @Override public String getType() { return "magicien"; }
+
+    @Override public Equipment getRandomWeapon() {
+        int random = (int) (Math.random() * 100 + 1);
+
+        if (random < 60) {
+            return new Spell("étincelles", 2);
+        } else if (random < 80) {
+            return new Spell("éclectricité statique", 3);
+        } else if (random < 95) {
+            return new Spell("dégât des eaux", 4);
+        } else {
+            return new Spell("pluie de pierres", 5);
+        }
+    }
 
     public String toString() {
         return super.toString() +

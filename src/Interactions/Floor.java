@@ -7,21 +7,21 @@ import Characters.Character;
 
 public class Floor
 {
-    public static Floor current;
-
     public Character snake;
     int snakeChance = 75;
-//    Attack attack;
-//    int attackChance = 10;
-//    Defense defense;
-//    int defenseChance = 10;
+    boolean attack;
+    int attackChance = 80;
+    boolean defense;
+    int defenseChance = 10;
 
     public Floor() {
-        if (shallISpawn(snakeChance)) {
+        if (shallISpawn(this.snakeChance)) {
             this.snake = new Snake();
             this.snake.setHealth(Interact.randomiser(this.snake.getMinHealth(), this.snake.getMaxHealth()));
             this.snake.setStrength(Interact.randomiser(this.snake.getMinStrength(), this.snake.getMaxStrength()));
         }
+        if (shallISpawn(this.attackChance)) this.attack = true; else this.attack = false;
+        if (shallISpawn(this.defenseChance)) this.defense = true; else this.defense = false;
     }
 
     public boolean shallISpawn(int coef) {

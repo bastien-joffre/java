@@ -1,5 +1,7 @@
 package Characters;
 
+import Equipments.Equipment;
+
 public class Snake extends Character
 {
     private int minHealth = 5;
@@ -40,6 +42,10 @@ public class Snake extends Character
     /********* Autres méthodes ***********/
 
     @Override public String getType() { return "serpent"; }
+
+    @Override public Equipment getRandomWeapon() {
+        return null;
+    }
 
     public String toString() {
         return

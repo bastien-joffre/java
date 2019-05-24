@@ -19,4 +19,13 @@ public abstract class Defense extends Equipment
     public int getResistance() {
         return this.resistance;
     }
+
+    @Override public abstract String getCategory();
+
+    @Override public String toString() {
+        return
+            "--- " + super.getName() + " ---\n" +
+            "Puissance : " + this.resistance +
+            "\n";
+    }
 }

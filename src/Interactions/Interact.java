@@ -5,6 +5,7 @@ import Characters.Warrior;
 import Characters.Wizard;
 import Characters.Snake;
 
+import Equipments.Equipment;
 import Exceptions.NamingException;
 
 import java.util.ArrayList;
@@ -115,6 +116,23 @@ public class Interact
         int option = parseInt(input.nextLine());
         while (option < 1 || option > 2) {
             System.out.println("Nous n'avons pas compris votre choix... Tappez 1, 2 ou 3.");
+            option = parseInt(input.nextLine());
+        }
+        return option;
+    }
+
+    public static int equipOrNot(Character player, Equipment equipment) {
+        System.out.println("Vous avez trouvé" + equipment.getCategory() + " :\n" +
+                equipment + "\n Actuellement, vous possedez :\n" + player.getEquipedAttack() +
+                "  ___ QUE SOUHAITEZ-VOUS FAIRE ? _______________  \n"+
+                "/                                              \\\n"+
+                "|     [1] Equiper votre trouvaille             |\n"+
+                "|     [2] Passer votre chemin                  |\n"+
+                "\\______________________________________________/\n"
+        );
+        int option = parseInt(input.nextLine());
+        while (option < 1 || option > 2) {
+            System.out.println("Nous n'avons pas compris votre choix... Tappez 1 ou 2");
             option = parseInt(input.nextLine());
         }
         return option;
