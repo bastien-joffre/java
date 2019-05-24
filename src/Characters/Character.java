@@ -49,6 +49,12 @@ public abstract class Character
     public int getStrength() {
         return this.strength;
     }
+    public Attack getEquipedAttack() {
+        return equipedAttack;
+    }
+    public Defense getEquipedDefense() {
+        return equipedDefense;
+    }
 
     /********** Setters **********/
 
@@ -78,10 +84,7 @@ public abstract class Character
 
     public String  toString() {
         return "Caractéristiques de " + this.name + " le " + this.getType() + ":" +
-            "\n- Image : " + this.image +
             "\n- Points de vie : " + this.health +
-            "\n- Force de frappe : " + this.strength +
-            "\n- Je frappe avec : " + this.equipedAttack.getName() + " avec une puissance de " + this.equipedAttack.getPower() +
-            "\n- Je me protège avec : " + this.equipedDefense.getName() + " qui possède une résistance de " + this.equipedDefense.getResistance();
+            "\n- Force de frappe : " + this.strength;
     }
 }

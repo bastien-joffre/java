@@ -7,10 +7,10 @@ import Equipments.Defense.Shield;
 
 public class Warrior extends Character
 {
-    private static int minHealth = 5;
-    private static int maxHealth = 10;
-    private static int minStrength = 5;
-    private static int maxStrength = 10;
+    private int minHealth = 5;
+    private int maxHealth = 10;
+    private int minStrength = 5;
+    private int maxStrength = 10;
 
 //    private Interact interact = new Interact();
 
@@ -18,8 +18,8 @@ public class Warrior extends Character
 
     public Warrior(String pName, String pImage, int pHealth, int pStrength) {
         super(pName, pImage, pHealth, pStrength);
-        super.equipedAttack = new Weapon ("hache", 12);
-        super.equipedDefense = new Shield("bouclier en bois", 4);
+        super.equipedAttack = new Weapon ("hache", 4);
+        super.equipedDefense = new Shield("bouclier en bois", 1);
 
     }
     public Warrior(String pName, String pImage)
@@ -62,4 +62,10 @@ public class Warrior extends Character
     /********* Autres méthodes ***********/
 
     @Override public String getType() { return "guerrier"; }
+
+    public String toString() {
+        return super.toString() +
+        "\n- Je frappe avec : " + this.equipedAttack.getName() + " à une puissance de " + this.equipedAttack.getPower() +
+        "\n- Je me protège avec : " + this.equipedDefense.getName() + " qui possède une résistance de " + this.equipedDefense.getResistance();
+    }
 }

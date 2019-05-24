@@ -3,6 +3,7 @@ package Interactions;
 import Characters.Character;
 import Characters.Warrior;
 import Characters.Wizard;
+import Characters.Snake;
 
 import Exceptions.NamingException;
 
@@ -26,10 +27,10 @@ public class Interact
             "|     [3] Quitter le jeu                       |\n"+
             "\\______________________________________________/\n"
         );
-        int option = Interact.parseInt(input.nextLine());
+        int option = parseInt(input.nextLine());
         while (option < 1 || option > 3) {
             System.out.println("Nous n'avons pas compris votre choix... Tappez 1, 2 ou 3.");
-            option = Interact.parseInt(input.nextLine());
+            option = parseInt(input.nextLine());
         }
         return option;
     }
@@ -103,17 +104,37 @@ public class Interact
         }
     }
 
+    public static int fightingOptions() {
+        System.out.println(
+            "  ___ OPTIONS DE COMBAT _______________________  \n"+
+            "/                                              \\\n"+
+            "|     [1] Attaquer                             |\n"+
+            "|     [2] Fuir comme un lâche                  |\n"+
+            "\\______________________________________________/\n"
+        );
+        int option = parseInt(input.nextLine());
+        while (option < 1 || option > 2) {
+            System.out.println("Nous n'avons pas compris votre choix... Tappez 1, 2 ou 3.");
+            option = parseInt(input.nextLine());
+        }
+        return option;
+    }
+
     /********** Characters **********/
 
-    public static void createCharacter() throws NamingException {
+    public static void createCharacter() {
 
-        String name;
-        try {
-            name = chooseName();
-        } catch (NamingException e) {
-            System.out.println(e.getMessage());
-            name = chooseName();
-        }
+        String name = "";
+        boolean ok;
+        do {
+            try {
+                name = chooseName();
+                ok = true;
+            } catch (NamingException e) {
+                System.out.println(e.getMessage());
+                ok = false;
+            }
+        } while (!ok);
 
         System.out.println("Bienvenue à toi " + name + ", donne moi un lien vers une image de toi maintenant :");
         String image = input.nextLine(); // Rentrer l"url de l"image
@@ -132,8 +153,8 @@ public class Interact
             newCharacter = new Wizard(name, image);
         }
 
-        newCharacter.setHealth(Interact.chooseHealth(newCharacter));
-        newCharacter.setStrength(Interact.chooseStrength(newCharacter));
+        newCharacter.setHealth(chooseHealth(newCharacter));
+        newCharacter.setStrength(chooseStrength(newCharacter));
 
         newCharacter.setEquipedAttack();
         newCharacter.setEquipedDefense();
@@ -265,7 +286,7 @@ public class Interact
         );
     }
 
-    private static int randomiser(int min, int max) {
+    public static int randomiser(int min, int max) {
         return min + (int)(Math.random() * ((max - min) + 1));
     }
 }

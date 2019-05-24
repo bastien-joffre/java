@@ -61,4 +61,10 @@ public class Wizard extends Character
     /********* Autres méthodes ***********/
 
     @Override public String getType() { return "magicien"; }
+
+    public String toString() {
+        return super.toString() +
+            "\n- Je lance le sort : " + this.equipedAttack.getName() + " à une puissance de " + this.equipedAttack.getPower() +
+            "\n- Je me protège avec : " + this.equipedDefense.getName() + " qui possède une résistance de " + this.equipedDefense.getResistance();
+    }
 }
