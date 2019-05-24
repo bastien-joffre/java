@@ -72,8 +72,14 @@ public abstract class Character
         this.strength = pStrength;
     }
 
-    public abstract void setEquipedAttack();
-    public abstract void setEquipedDefense();
+//    public abstract void setEquipedAttack();
+//    public abstract void setEquipedDefense();
+    public void setEquipedAttack(Equipment attack) {
+        this.equipedAttack = (Attack) attack;
+    };
+    public void setEquipedDefense(Equipment defense) {
+        this.equipedDefense = (Defense) defense;
+    };
 
     /********* Autres méthodes ***********/
 
@@ -83,6 +89,7 @@ public abstract class Character
     public abstract int getMaxStrength();
     public abstract String getType();
     public abstract Equipment getRandomWeapon();
+    public abstract Equipment getRandomDefense();
 
     public String toString() {
         return "Caractéristiques de " + this.name + " le " + this.getType() + ":" +

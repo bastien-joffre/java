@@ -1,9 +1,10 @@
 package Characters;
 
 import Equipments.Equipment;
-import Interactions.Interact;
 
+import Equipments.Attack.Attack;
 import Equipments.Attack.Spell;
+import Equipments.Defense.Defense;
 import Equipments.Defense.Philter;
 
 public class Wizard extends Character
@@ -19,8 +20,8 @@ public class Wizard extends Character
 
     public Wizard(String pName, String pImage, int pHealth, int pStrength) {
         super(pName, pImage, pHealth, pStrength);
-        super.equipedAttack = new Spell ("boules de fire", 16);
-        super.equipedDefense = new Philter("champ de force", 5);
+        super.equipedAttack = new Spell ("briquet magique", 1);
+        super.equipedDefense = new Philter("distraction", 1);
     }
     public Wizard(String pName, String pImage)
     {
@@ -44,20 +45,20 @@ public class Wizard extends Character
 
     /********** Setters **********/
 
-    public void setEquipedAttack() {
-        Spell spell = new Spell(
-            Interact.chooseEquipmentName("sort"),
-            Interact.chooseAttackPower("sort")
-        );
-        super.equipedAttack = spell;
-    }
-    public void setEquipedDefense() {
-        Philter philter = new Philter(
-            Interact.chooseEquipmentName("filtre"),
-            Interact.chooseDefenseResistance("filtre")
-        );
-        super.equipedDefense = philter;
-    }
+//    public void setEquipedAttack() {
+//        Spell spell = new Spell(
+//            Interact.chooseEquipmentName("sort"),
+//            Interact.chooseAttackPower("sort")
+//        );
+//        super.equipedAttack = spell;
+//    }
+//    public void setEquipedDefense() {
+//        Philter philter = new Philter(
+//            Interact.chooseEquipmentName("filtre"),
+//            Interact.chooseDefenseResistance("filtre")
+//        );
+//        super.equipedDefense = philter;
+//    }
 
     /********* Autres méthodes ***********/
 
@@ -74,6 +75,20 @@ public class Wizard extends Character
             return new Spell("dégât des eaux", 4);
         } else {
             return new Spell("pluie de pierres", 5);
+        }
+    }
+
+    @Override public Equipment getRandomDefense() {
+        int random = (int) (Math.random() * 100 + 1);
+
+        if (random < 60) {
+            return new Philter("contrejour", 2);
+        } else if (random < 80) {
+            return new Philter("tour de magie ou quand on fait un noeud sur une ficelle et on tire et ya plus de noeud", 3);
+        } else if (random < 95) {
+            return new Philter("illusion", 4);
+        } else {
+            return new Philter("champ de force", 5);
         }
     }
 

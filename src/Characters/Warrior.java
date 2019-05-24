@@ -19,8 +19,8 @@ public class Warrior extends Character
 
     public Warrior(String pName, String pImage, int pHealth, int pStrength) {
         super(pName, pImage, pHealth, pStrength);
-        super.equipedAttack = new Weapon ("hache", 4);
-        super.equipedDefense = new Shield("bouclier en bois", 1);
+        super.equipedAttack = new Weapon ("épée pourrave", 1);
+        super.equipedDefense = new Shield("bouclier en polysthyrène expansé", 1);
 
     }
     public Warrior(String pName, String pImage)
@@ -45,20 +45,20 @@ public class Warrior extends Character
 
     /********** Setters **********/
 
-    public void setEquipedAttack() {
-        Weapon weapon = new Weapon(
-            Interact.chooseEquipmentName("arme"),
-            Interact.chooseAttackPower("arme")
-        );
-        super.equipedAttack = weapon;
-    }
-    public void setEquipedDefense() {
-        Shield shield = new Shield(
-            Interact.chooseEquipmentName("bouclier"),
-            Interact.chooseDefenseResistance("bouclier")
-        );
-        super.equipedDefense = shield;
-    }
+//    public void setEquipedAttack() {
+//        Weapon weapon = new Weapon(
+//            Interact.chooseEquipmentName("arme"),
+//            Interact.chooseAttackPower("arme")
+//        );
+//        super.equipedAttack = weapon;
+//    }
+//    public void setEquipedDefense() {
+//        Shield shield = new Shield(
+//            Interact.chooseEquipmentName("bouclier"),
+//            Interact.chooseDefenseResistance("bouclier")
+//        );
+//        super.equipedDefense = shield;
+//    }
 
     /********* Autres méthodes ***********/
 
@@ -75,6 +75,20 @@ public class Warrior extends Character
             return new Weapon("hache en contraplaqué", 4);
         } else {
             return new Weapon("AK-47", 5);
+        }
+    }
+
+    @Override public Equipment getRandomDefense() {
+        int random = (int) (Math.random() * 100 + 1);
+
+        if (random < 60) {
+            return new Shield("bouclier en carton", 2);
+        } else if (random < 80) {
+            return new Shield("string en mithryl", 3);
+        } else if (random < 95) {
+            return new Shield("armure en acier", 4);
+        } else {
+            return new Shield("casque tactique", 5);
         }
     }
 

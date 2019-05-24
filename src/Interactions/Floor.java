@@ -7,18 +7,21 @@ import Characters.Character;
 
 public class Floor
 {
+    static int level = 0;
+
     public Character snake;
     int snakeChance = 75;
     boolean attack;
-    int attackChance = 80;
+    int attackChance = 50;
     boolean defense;
-    int defenseChance = 10;
+    int defenseChance = 50;
 
     public Floor() {
+        level++;
         if (shallISpawn(this.snakeChance)) {
             this.snake = new Snake();
-            this.snake.setHealth(Interact.randomiser(this.snake.getMinHealth(), this.snake.getMaxHealth()));
-            this.snake.setStrength(Interact.randomiser(this.snake.getMinStrength(), this.snake.getMaxStrength()));
+            this.snake.setHealth(randomLife(this.snake.getMinHealth(), this.snake.getMaxHealth()));
+            this.snake.setStrength(randomLife(this.snake.getMinStrength(), this.snake.getMaxStrength()));
         }
         if (shallISpawn(this.attackChance)) this.attack = true; else this.attack = false;
         if (shallISpawn(this.defenseChance)) this.defense = true; else this.defense = false;
@@ -30,6 +33,10 @@ public class Floor
         } else {
             return false;
         }
+    }
+
+    public int randomLife(double min, double max) {
+        return (int) (min + (Math.random() * ((max - min) + 1))) * ((level * 3 / 100) + 1);
     }
 
     public String toString() {

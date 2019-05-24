@@ -4,10 +4,10 @@ import Equipments.Equipment;
 
 public class Snake extends Character
 {
-    private int minHealth = 5;
-    private int maxHealth = 8;
-    private int minStrength = 2;
-    private int maxStrength = 4;
+    private int minHealth = 1;
+    private int maxHealth = 5;
+    private int minStrength = 1;
+    private int maxStrength = 5;
 
     /********** Constructors **********/
 
@@ -44,6 +44,9 @@ public class Snake extends Character
     @Override public String getType() { return "serpent"; }
 
     @Override public Equipment getRandomWeapon() {
+        return null;
+    }
+    @Override public Equipment getRandomDefense() {
         return null;
     }
 

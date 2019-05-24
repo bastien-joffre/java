@@ -14,33 +14,34 @@ import java.util.regex.Pattern;
 
 public class Interact
 {
-    public static ArrayList<Character> characters = new ArrayList<>();
-    private static Scanner input = new Scanner(System.in);
+    public ArrayList<Character> characters = new ArrayList<>();
+    private Scanner input = new Scanner(System.in);
 
     /********** Menus **********/
 
-    public static int mainMenu() {
+    public int mainMenu() {
         System.out.println(
-            "  ___ MENU PRINCIPAL _________________________  \n"+
+            "  ___ MENU PRINCIPAL ________________ level " + Floor.level + "\n"+
             "/                                              \\\n"+
             "|     [1] Créer un nouveau personnage          |\n"+
             "|     [2] Consulter vos personnages            |\n"+
-            "|     [3] Quitter le jeu                       |\n"+
+            "|     [3] Partir combatre                      |\n"+
+            "|     [4] Quitter le jeu                       |\n"+
             "\\______________________________________________/\n"
         );
         int option = parseInt(input.nextLine());
-        while (option < 1 || option > 3) {
-            System.out.println("Nous n'avons pas compris votre choix... Tappez 1, 2 ou 3.");
+        while (option < 1 || option > 4) {
+            System.out.println("Nous n'avons pas compris votre choix... Tappez 1, 2, 3 ou 4.");
             option = parseInt(input.nextLine());
         }
         return option;
     }
 
-    public static void charactersMenu() {
+    public void charactersMenu() {
         System.out.println();
-        for (Character character : Interact.characters) {
+        for (Character character : this.characters) {
             System.out.println(
-                    "[" + (Interact.characters.indexOf(character) + 1) + "] " +
+                    "[" + (this.characters.indexOf(character) + 1) + "] " +
                             character.getName() + " le " + character.getType()
             );
         }
@@ -62,7 +63,7 @@ public class Interact
         }
     }
 
-    private static void modifyCharacter(Character character) {
+    private void modifyCharacter(Character character) {
         System.out.println(
             "\n\n" + character + "\n\n" +
             "  ___ OPTIONS ________________________________  \n"+
@@ -91,56 +92,23 @@ public class Interact
                 modifyCharacter(character);
                 break;
             case "3":
-                character.setEquipedAttack();
+//                character.setEquipedAttack();
                 modifyCharacter(character);
                 break;
             case "4":
-                character.setEquipedDefense();
+//                character.setEquipedDefense();
                 modifyCharacter(character);
                 break;
             case "5":
-                characters.remove(character);
+                this.characters.remove(character);
                 charactersMenu();
                 break;
         }
     }
 
-    public static int fightingOptions() {
-        System.out.println(
-            "  ___ OPTIONS DE COMBAT _______________________  \n"+
-            "/                                              \\\n"+
-            "|     [1] Attaquer                             |\n"+
-            "|     [2] Fuir comme un lâche                  |\n"+
-            "\\______________________________________________/\n"
-        );
-        int option = parseInt(input.nextLine());
-        while (option < 1 || option > 2) {
-            System.out.println("Nous n'avons pas compris votre choix... Tappez 1, 2 ou 3.");
-            option = parseInt(input.nextLine());
-        }
-        return option;
-    }
-
-    public static int equipOrNot(Character player, Equipment equipment) {
-        System.out.println("Vous avez trouvé" + equipment.getCategory() + " :\n" +
-                equipment + "\n Actuellement, vous possedez :\n" + player.getEquipedAttack() +
-                "  ___ QUE SOUHAITEZ-VOUS FAIRE ? _______________  \n"+
-                "/                                              \\\n"+
-                "|     [1] Equiper votre trouvaille             |\n"+
-                "|     [2] Passer votre chemin                  |\n"+
-                "\\______________________________________________/\n"
-        );
-        int option = parseInt(input.nextLine());
-        while (option < 1 || option > 2) {
-            System.out.println("Nous n'avons pas compris votre choix... Tappez 1 ou 2");
-            option = parseInt(input.nextLine());
-        }
-        return option;
-    }
-
     /********** Characters **********/
 
-    public static void createCharacter() {
+    public void createCharacter() {
 
         String name = "";
         boolean ok;
@@ -166,52 +134,52 @@ public class Interact
 
         Character newCharacter;
         if (characterType.equals("g")) {
-            newCharacter = new Warrior(name, image);
+            newCharacter = new Warrior(name, image, 8, 8);
         } else {
-            newCharacter = new Wizard(name, image);
+            newCharacter = new Wizard(name, image, 5, 11);
         }
 
-        newCharacter.setHealth(chooseHealth(newCharacter));
-        newCharacter.setStrength(chooseStrength(newCharacter));
-
-        newCharacter.setEquipedAttack();
-        newCharacter.setEquipedDefense();
+//        newCharacter.setHealth(chooseHealth(newCharacter));
+//        newCharacter.setStrength(chooseStrength(newCharacter));
+//
+//        newCharacter.setEquipedAttack();
+//        newCharacter.setEquipedDefense();
 
         System.out.println(newCharacter);
-        characters.add(newCharacter);
+        this.characters.add(newCharacter);
     }
 
-    private static String chooseName() throws NamingException {
+    private String chooseName() throws NamingException {
         System.out.println("Quel sera le nom de votre combattant ?");
         String name = input.nextLine();
-        if (stringContainsNumber(name)){
+        if (this.stringContainsNumber(name)){
           throw new NamingException();
         } else {
             return name;
         }
     }
 
-    private static String chooseImage() {
+    private String chooseImage() {
         System.out.println("Quelle image veux-tu utiliser ?");
         return input.nextLine(); // Rentrer l'url de l'image
     }
 
-    public static int chooseAttackPower(String type) {
+    public int chooseAttackPower(String type) {
         System.out.println("Quelle sera la puissance de votre " + type);
         return parseInt(input.nextLine());
     }
 
-    public static String chooseEquipmentName(String type) {
+    public String chooseEquipmentName(String type) {
         System.out.println("Comment souhaitez vous appeler votre " + type);
         return input.nextLine();
     }
 
-    public static int chooseDefenseResistance(String type) {
+    public int chooseDefenseResistance(String type) {
         System.out.println("Quelle sera la resistance de votre " + type);
         return parseInt(input.nextLine());
     }
 
-    public static int chooseHealth(Character character) {
+    public int chooseHealth(Character character) {
         System.out.println("Sur une échelle de " + character.getMinHealth() + " à " + character.getMaxHealth() + ", à quel point pense tu être résistant ?");
         int health = parseInt(input.nextLine()); // Rentrer le nombre de Points de vie
         if (health == 0) {
@@ -224,7 +192,7 @@ public class Interact
         return health;
     }
 
-    public static int chooseStrength(Character character) {
+    public int chooseStrength(Character character) {
         System.out.println("Et sur une échelle de " + character.getMinStrength() + " à " + character.getMaxStrength() + ", à quel point pense tu être balèze ?");
         int strength = parseInt(input.nextLine()); // Rentrer le nombre de Points de vie
         if (strength == 0) {
@@ -240,6 +208,7 @@ public class Interact
     /********** Other methods **********/
 
     public static int parseInt(String string) {
+        Scanner input = new Scanner(System.in);
         try {
             return Integer.parseInt(string);
         } catch (NumberFormatException nfe) {
@@ -248,11 +217,11 @@ public class Interact
         }
     }
 
-    public static boolean stringContainsNumber( String s ) {
+    public boolean stringContainsNumber( String s ) {
         return Pattern.compile( "[0-9]" ).matcher( s ).find();
     }
 
-    public static void asciiWelcome() {
+    public void asciiWelcome() {
         System.out.println(
             "            .                                                      .             \n" +
             "          .n                   .                 .                  n.           \n" +
@@ -288,7 +257,7 @@ public class Interact
         );
     }
 
-    public static void asciiGoodbye() {
+    public void asciiGoodbye() {
         System.out.println(
             "\n"+
             "  ▄████  ▄▄▄       ███▄ ▄███▓▓█████     ▒█████   ██▒   █▓▓█████  ██▀███      ▐██▌ \n"+
